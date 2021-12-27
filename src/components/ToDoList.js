@@ -1,48 +1,41 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ToDo from './ToDo';
 import ToDoForm from './ToDoForm'
 
-class ToDoList extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {todoList: []};
-    }
+const ToDoList = () => {
+    const [todoList, setTodoList] = useState([]);
 
-    addTodo = (e) => {
+    const addTodo = (e) => {
         if (!e.text || /^\s*$/.test(e.text)) {
             return;
         }
-        this.setState({todoList: [e, ...this.state.todoList]});
+        setTodoList([e, ...todoList]);
     }
 
-    completeTodo = (id) => {
-        let updateToDoList = this.state.todoList.map((todo) => {
-            if(todo.id === id)
+    const completeTodo = (id) => {
+        let updateToDoList = todoList.map((todo) => {
+            if (todo.id === id)
                 todo.isComplete = !todo.isComplete
             return todo;
         });
-        this.setState({todoList: updateToDoList});
+        setTodoList(updateToDoList);
     }
 
-    deleteToDo = (id) => {
-        let updateToDoList = [];
-        this.state.todoList.filter((todo) => {
-            if(todo.id !== id)
-                updateToDoList.push(todo);
+    const deleteToDo = (id) => {
+        let updateToDoList = todoList.filter((todo) => {
+            return todo.id !== id;
         });
-        this.setState({todoList: updateToDoList});
+        setTodoList(updateToDoList);
     }
 
-    render(){
-        return (
-            <div>
-                <ToDoForm onSubmit={this.addTodo} />
-                <div className='items-to-list'>
-                <ToDo todoList={this.state.todoList} completeTodo={this.completeTodo} deleteToDo={this.deleteToDo} />
-                </div>
+    return (
+        <div>
+            <ToDoForm onSubmit={addTodo} />
+            <div className='items-to-list'>
+                <ToDo todoList={todoList} completeTodo={completeTodo} deleteToDo={deleteToDo} />
             </div>
-        )
-    }
+        </div>
+    )
 }
 
 export default ToDoList
