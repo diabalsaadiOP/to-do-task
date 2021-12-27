@@ -1,0 +1,35 @@
+.to-do-task {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 15px 0;
+}
+
+.to-do-task-complete {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 15px 0;
+    text-decoration: line-through;
+}
+
+.todo-form {
+    display: flex;
+    justify-content: space-around;
+}
+
+.todo-input {
+    height: 30px;
+    border-radius: 10px;
+    width: 400px;
+}
+
+.todo-button {
+    border-radius: 15px;
+}
